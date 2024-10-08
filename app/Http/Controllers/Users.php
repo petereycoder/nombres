@@ -59,7 +59,8 @@ class Users extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::find($id);
+        return view('modules.users.edit', compact('user'));
     }
 
     /**
@@ -67,7 +68,13 @@ class Users extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = hash('md5',$request->password);
+        $user->save();
+
+        return redirect()->route('index');
     }
 
     /**
