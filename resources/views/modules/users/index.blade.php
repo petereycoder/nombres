@@ -25,7 +25,9 @@
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>
-                                    <form action="" method="POST">
+                                    <form action="{{ route('destroy', $item->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
                                         <a href="{{ route('show', $item->id) }}" class="btn btn-info">
                                             <i class="fa fa-list" aria-hidden="true"></i> Mostrar
                                         </a>

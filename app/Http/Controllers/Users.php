@@ -82,6 +82,9 @@ class Users extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect()->route('index');
     }
 }
