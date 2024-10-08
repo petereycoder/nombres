@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class Users extends Controller
@@ -11,7 +12,8 @@ class Users extends Controller
      */
     public function index()
     {
-        return view('modules.users.index');
+        $user = User::paginate(2);
+        return view('modules.users.index', compact('user'));
     }
 
     /**
@@ -19,7 +21,7 @@ class Users extends Controller
      */
     public function create()
     {
-        //
+        return view('modules.users.create');
     }
 
     /**
@@ -27,7 +29,20 @@ class Users extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed'],
+        ]);*/
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => hash('md5',$request->password),
+        ]);
+
+        return redirect()->route('index');
     }
 
     /**
@@ -35,7 +50,8 @@ class Users extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::find($id);
+        return view('modules.users.show', compact('user'));
     }
 
     /**
@@ -43,7 +59,8 @@ class Users extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::find($id);
+        return view('modules.users.edit', compact('user'));
     }
 
     /**
@@ -51,7 +68,13 @@ class Users extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = hash('md5',$request->password);
+        $user->save();
+
+        return redirect()->route('index');
     }
 
     /**
@@ -59,6 +82,9 @@ class Users extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect()->route('index');
     }
 }
