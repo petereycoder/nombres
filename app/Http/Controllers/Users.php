@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class Users extends Controller
@@ -19,7 +20,7 @@ class Users extends Controller
      */
     public function create()
     {
-        //
+        return view('modules.users.create');
     }
 
     /**
@@ -27,7 +28,20 @@ class Users extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed'],
+        ]);*/
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => hash('md5',$request->password),
+        ]);
+
+        return redirect()->route('index');
     }
 
     /**

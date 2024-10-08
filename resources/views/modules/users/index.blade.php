@@ -7,7 +7,7 @@
                 <h2>Crud Laravel 11</h2>
                 <div class="card">
                     <div class="card-body">
-                      This is some text within a card body.
+                      <a href="{{ route('create') }}" class="btn btn-primary">Agregar</a>
                     </div>
                 </div>
 
