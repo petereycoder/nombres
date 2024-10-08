@@ -50,7 +50,8 @@ class Users extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::find($id);
+        return view('modules.users.show', compact('user'));
     }
 
     /**

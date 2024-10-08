@@ -26,7 +26,7 @@
                                 <td>{{ $item->name }}</td>
                                 <td>
                                     <form action="" method="POST">
-                                        <a href="" class="btn btn-info">
+                                        <a href="{{ route('show', $item->id) }}" class="btn btn-info">
                                             <i class="fa fa-list" aria-hidden="true"></i> Mostrar
                                         </a>
                                         <a href="" class="btn btn-warning">
