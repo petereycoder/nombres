@@ -16,6 +16,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
+                                <th>Email</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -24,6 +25,7 @@
                             <tr>
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->name }}</td>
+                                <td>{{ $item->email }}</td>
                                 <td>
                                     <form id="frm_{{$item->id}}" action="{{ route('destroy', $item->id) }}" method="POST">
                                         @csrf
