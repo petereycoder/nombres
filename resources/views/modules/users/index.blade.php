@@ -57,3 +57,14 @@
         </div>
     </div>
 @endsection
+@section('scripts')
+    @if ($msj = Session::get('success'))
+        <script>
+            Swal.fire({
+                title: "Excelente",
+                text: "{{ $msj }}",
+                icon: "success"
+            });
+        </script>
+    @endif
+@endsection

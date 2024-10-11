@@ -42,7 +42,7 @@ class Users extends Controller
             'password' => hash('md5',$request->password),
         ]);
 
-        return redirect()->route('index');
+        return redirect()->route('index')->with('success', 'Usuario creado');
     }
 
     /**
