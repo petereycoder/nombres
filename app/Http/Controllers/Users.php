@@ -74,7 +74,7 @@ class Users extends Controller
         $user->password = hash('md5',$request->password);
         $user->save();
 
-        return redirect()->route('index');
+        return redirect()->route('index')->with('success', 'Usuario actualizado');
     }
 
     /**
@@ -85,6 +85,6 @@ class Users extends Controller
         $user = User::find($id);
         $user->delete();
 
-        return redirect()->route('index');
+        return redirect()->route('index')->with('success', 'Usuario eliminado');
     }
 }
